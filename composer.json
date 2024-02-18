@@ -1,0 +1,15 @@
+{
+    "name": "wjame/deal-breaker",
+    "autoload": {
+        "psr-4": {
+            "DealBreaker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Winfrey De Vera",
+            "email": "w.jamesdevera@gmail.com"
+        }
+    ],
+    "require": {}
+}
