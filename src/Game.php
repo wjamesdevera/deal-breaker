@@ -3,37 +3,95 @@ declare(strict_types= 1);
 
 namespace DealBreaker;
 
-use DealBreaker\Card;
-
-const CARD_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-/*
- * Card Faces
- * 
- * D - Diamond
- * C - Club
- * H - Heart
- * S - Spade
- */
-const CARD_FACES = ['D', 'C', 'H', 'S'];
-
+use DealBreaker\DeckOfCards;
 class Game
 {
-    private $minNumber;
-    private $maxNumber;
-    private $MAX_RANGE;
-    private $MIN_RANGE;
-    private $cards;
+    private $deck;
+    private const CARD_RANKING = [
+        "2" => 2,
+        "3"=> 3,
+        "4"=> 4,
+        "5"=> 5,
+        "6"=> 6,
+        "7"=> 7,
+        "8"=> 8,
+        "9"=> 9,
+        "10"=> 10,
+        "J"=> 11,
+        "Q"=> 12,
+        "K"=> 13,
+        "A" => 14,
+    ];
+
+    private $dealtCards;
+    private $minCard;
+    private $maxCard;
+    private $playerCard;
+    private $isPair;
+
     public function __construct()
     {
-        $this->initializeCards();
+        $this->deck = new DeckOfCards();
     }
 
-    private function initializeCards()
+    public function dealTwoCards(): array
     {
-        foreach(CARD_FACES as $cardFace) {
-            foreach(CARD_VALUES as $cardValue) {
-                $this->cards[] = new Card($cardValue, $cardFace);
-            }
+        $this->dealtCards[0] = $this->deck->dealCard();
+        $this->dealtCards[1] = $this->deck->dealCard();
+        $this->handleNullCards();
+        $this->determineMinAndMaxCard();
+        return $this->handleReturnArrayForDealTwoCards();
+    }
+
+    private function handleReturnArrayForDealTwoCards(): array
+    {
+        if (self::CARD_RANKING[$this->dealtCards[0]->getRank()] == self::CARD_RANKING[$this->dealtCards[1]->getRank()]) {
+            $this->isPair = true;
+            return [
+                "card_1" => $this->dealtCards[0],
+                "card_2" => $this->dealtCards[1],
+                'pair' => true
+            ];
+        }
+        $this->isPair = false;
+        return [
+            "card_1" => $this->dealtCards[0],
+            "card_2" => $this->dealtCards[1],
+            'pair' => false
+        ];
+    }
+
+    private function handleNullCards(): void
+    {
+        if ($this->dealtCards[0] === null || $this->dealtCards[1] === null) {
+            $this->deck->resetDeck();
+            $this->dealtCards[0] = $this->deck->dealCard();
+            $this->dealtCards[1] = $this->deck->dealCard();
+        }
+    }
+
+    public function getPlayerCard(): Card
+    {
+        $playerCard = $this->deck->dealCard();
+        if ($playerCard === null) {
+            $this->deck->resetDeck();
+            $playerCard = $this->deck->dealCard();
+        }
+        $this->playerCard = $playerCard;
+        return $this->playerCard;
+    }
+
+    private function determineMinAndMaxCard(): void
+    {
+        if (self::CARD_RANKING[$this->dealtCards[0]->getRank()] == self::CARD_RANKING[$this->dealtCards[1]->getRank()]) {
+            $this->minCard = $this->dealtCards[0];
+            $this->maxCard = $this->dealtCards[1];
+        } else if (self::CARD_RANKING[$this->dealtCards[0]->getRank()] < self::CARD_RANKING[$this->dealtCards[1]->getRank()]) {
+            $this->minCard = $this->dealtCards[0];
+            $this->maxCard = $this->dealtCards[1];
+        } else {
+            $this->minCard = $this->dealtCards[1];
+            $this->maxCard = $this->dealtCards[0];
         }
     }
 }
