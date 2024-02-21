@@ -73,7 +73,7 @@ class User extends Database
     }
 
     // DELETE
-    public function delete_user(int $id): bool
+    public function deleteUser(int $id): bool
     {
         try {
             $query = "DELETE FROM users
