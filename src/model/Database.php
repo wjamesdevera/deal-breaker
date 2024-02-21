@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DealBreaker\Model;
 
-require_once dirname(__DIR__) ."\\config\\config.php";
+require_once dirname(dirname(__DIR__)) ."\\config\\config.php";
 
 use PDOException;
 use PDO;
@@ -17,7 +17,7 @@ class Database
     private $password = DB_PASSWORD;
     private $databaseName = DB_NAME;
 
-    protected function connect(): PDO
+    protected function connect()
     {
         try {
             $dbh = new PDO("mysql:host={$this->host};port={$this->port};dbname={$this->databaseName}", $this->username, $this->password);
@@ -26,5 +26,13 @@ class Database
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
+    }
+
+    protected static function sanitizeInput(string $data): string
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }

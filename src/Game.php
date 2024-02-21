@@ -24,8 +24,8 @@ class Game
     ];
 
     private $dealtCards;
-    private $minCard;
-    private $maxCard;
+    private $minValue;
+    private $maxValue;
     private $playerCard;
     private $isPair;
 
@@ -39,7 +39,6 @@ class Game
         $this->dealtCards[0] = $this->deck->dealCard();
         $this->dealtCards[1] = $this->deck->dealCard();
         $this->handleNullCards();
-        $this->determineMinAndMaxCard();
         return $this->handleReturnArrayForDealTwoCards();
     }
 
@@ -81,17 +80,28 @@ class Game
         return $this->playerCard;
     }
 
-    private function determineMinAndMaxCard(): void
+    public function determineOutcome(string $choice = null)
     {
-        if (self::CARD_RANKING[$this->dealtCards[0]->getRank()] == self::CARD_RANKING[$this->dealtCards[1]->getRank()]) {
-            $this->minCard = $this->dealtCards[0];
-            $this->maxCard = $this->dealtCards[1];
-        } else if (self::CARD_RANKING[$this->dealtCards[0]->getRank()] < self::CARD_RANKING[$this->dealtCards[1]->getRank()]) {
-            $this->minCard = $this->dealtCards[0];
-            $this->maxCard = $this->dealtCards[1];
-        } else {
-            $this->minCard = $this->dealtCards[1];
-            $this->maxCard = $this->dealtCards[0];
+        $this->determineMinAndMaxValue();
+        if ($choice != null) {
+            if ($choice == 'high' && self::CARD_RANKING[$this->playerCard->getRank()] > $this->minValue && self::CARD_RANKING[$this->playerCard->getRank()] > $this->maxValue) {
+                return 'win_pair';
+            } else if ($choice == 'low' && self::CARD_RANKING[$this->playerCard->getRank()] < $this->minValue && self::CARD_RANKING[$this->playerCard->getRank()] < $this->maxValue) {
+                return 'win_pair';
+            } else {
+                return 'lose_match';
+            }
         }
+        if ($this->minValue < self::CARD_RANKING[$this->playerCard->getRank()] && self::CARD_RANKING[$this->playerCard->getRank() < $this->maxValue]) {
+            return 'win_inbetween';
+        } else {
+            return 'lose_match';
+        }
+    }
+
+    private function determineMinAndMaxValue(): void
+    {
+        $this->minValue = min(self::CARD_RANKING[$this->dealtCards[0]->getRank()], self::CARD_RANKING[$this->dealtCards[1]->getRank()]);
+        $this->maxValue = max(self::CARD_RANKING[$this->dealtCards[0]->getRank()], self::CARD_RANKING[$this->dealtCards[1]->getRank()]);
     }
 }
