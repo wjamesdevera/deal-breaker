@@ -21,7 +21,7 @@ if (isset($_POST['username'])) {
         header('location: index.php');
         die();
     } else {
-        header('location: test.php');
+        header('location: index.php');
         die();
     }
 }
