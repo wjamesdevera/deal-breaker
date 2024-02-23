@@ -18,10 +18,7 @@
     <link rel="stylesheet" href="./css/home.css">
 </head>
 
-<body class="text-light d-flex flex-column min-vh-100">
-    <video id="bgVideo" preload="true" autoplay loop muted>
-        <source src="./media/mixkit-casino-chips-and-dices-30830-medium.mp4" type="video/mp4" />
-    </video>
+<body class="text-light d-flex flex-column min-vh-100 bg-black">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <div class="navbar-title">
@@ -33,10 +30,13 @@
             <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">PLAY</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">PLAY</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="about.php">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="leader_boards.php">LEADERBOARDS</a>
                     </li>
                 </ul>
                 <?php if (isset($_SESSION['logged_in'])) :  ?>

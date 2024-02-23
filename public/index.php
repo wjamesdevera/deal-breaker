@@ -6,7 +6,9 @@ session_start();
 
 require_once './includes/header.php'
 ?>
-
+<video id="bgVideo" preload="true" autoplay loop muted>
+    <source src="./media/mixkit-casino-chips-and-dices-30830-medium.mp4" type="video/mp4" />
+</video>
 <main class="d-flex justify-content-center align-items-center flex-fill">
 <?php if (!isset($_SESSION['logged_in'])) : ?>
     <form action="handle_login.php" method="post" class="col-md-6">

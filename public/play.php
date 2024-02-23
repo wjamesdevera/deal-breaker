@@ -22,6 +22,7 @@ if (isset($_SESSION["game"])) {
 
 include_once './includes/header.php';
 ?>
+<main class="d-flex justify-content-center align-items-center flex-fill">
   <?php
   if ($_SESSION['round_num'] != 10) :
     require_once './includes/game.php';
@@ -30,4 +31,5 @@ include_once './includes/header.php';
     header('location: index.php');
     die();
   endif ?>
+</main>
 <?php require_once './includes/footer.php' ?>
