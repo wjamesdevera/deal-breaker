@@ -92,7 +92,7 @@ class Game
                 return 'lose_match';
             }
         }
-        if ($this->minValue < self::CARD_RANKING[$this->playerCard->getRank()] && self::CARD_RANKING[$this->playerCard->getRank() < $this->maxValue]) {
+        if (($this->minValue < self::CARD_RANKING[$this->playerCard->getRank()]) && (self::CARD_RANKING[$this->playerCard->getRank()] < $this->maxValue)) {
             return 'win_inbetween';
         } else {
             return 'lose_match';
@@ -103,5 +103,10 @@ class Game
     {
         $this->minValue = min(self::CARD_RANKING[$this->dealtCards[0]->getRank()], self::CARD_RANKING[$this->dealtCards[1]->getRank()]);
         $this->maxValue = max(self::CARD_RANKING[$this->dealtCards[0]->getRank()], self::CARD_RANKING[$this->dealtCards[1]->getRank()]);
+    }
+
+    public function getDealtCards(): array
+    {
+        return $this->dealtCards;
     }
 }
