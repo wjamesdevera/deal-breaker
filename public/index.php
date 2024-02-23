@@ -1,44 +1,40 @@
 <?php
 
-use DealBreaker\Game;
-
 require_once (dirname(__DIR__)) . "\\vendor\\autoload.php";
 
 session_start();
 
+require_once './includes/header.php'
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deal Breaker</title>
-</head>
-
-<body>
-    <?php if (!isset($_SESSION['logged_in'])) : ?>
-        <form action="handle_login.php" method="post">
-            <input type="text" name="username" id="username" placeholder="Username" autocomplete="off">
-            <input type="submit" value="Login">
-        </form>
-    <?php else : ?>
-        <?php
-        $_SESSION['round_num'] = 0;
-        ?>
-        <?= 'Welcome, ' . $_SESSION['logged_user']['username'] ?>
-        <br>
-        <?= 'Coins ' .  $_SESSION['logged_user']['coins'] ?>
-        <br>
-        <a href="play.php">Play</a>
-        <form action="handle_logout.php" method="post">
-            <input type="submit" value="Logout">
-        </form>
-    <?php endif ?>
-    <audio loop autoplay>
-        <source src="./media/bg.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-</body>
-
-</html>
+<main class="d-flex justify-content-center align-items-center flex-fill">
+<?php if (!isset($_SESSION['logged_in'])) : ?>
+    <form action="handle_login.php" method="post" class="col-md-6">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h2>WELCOME TO DEAL BREAKER</h2>
+            </div>
+            <div class="card-body">
+                <p>EXPERIENCE CLASSIC CARD GAMES WITH A MODERN TWIST. CHALLENGE FRIENDS GLOBALLY OR CLIMB THE LEADERBOARDS. THE FUTURE OF CARD GAMING IS HERE-JOIN THE FUN!</p>
+                <h3 style="font-size: 16px">ENTER A USERNAME TO JOIN, OR LEAVE IT BLANK TO GET A RANDOM ONE</h3>
+                <input class="form-control" type="text" name="username" id="username" placeholder="USERNAME" autocomplete="off">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">JOIN</button>
+    </form>
+<?php else : ?>
+    <?php $_SESSION['round_num'] = 0; ?>
+    <form action="play.php" method="post" class="col-md-6">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h2>WELCOME TO DEAL BREAKER</h2>
+            </div>
+            <div class="card-body">
+                <p>EXPERIENCE CLASSIC CARD GAMES WITH A MODERN TWIST. CHALLENGE FRIENDS GLOBALLY OR CLIMB THE LEADERBOARDS. THE FUTURE OF CARD GAMING IS HERE-JOIN THE FUN!</p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">PLAY NOW</button>
+    </form>
+<?php endif ?>
+</main>
+<?php require_once './includes/footer.php' ?>

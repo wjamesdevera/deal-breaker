@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
         $choice = sanitizeInput($_POST['pair_choice']);
     }
 ?>
-
     <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" width="100rem">
     <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" width="100rem">
     <img src=<?= './img/cards/' . $game->getPlayerCard() . '.png' ?> alt="" width="100rem">
@@ -47,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     <?php endif ?>
     <br>
     <button><a href="play.php">Play Again</a></button>
+
 <?php else : ?>
     <?php
     $_SESSION['round_cards'] = $_SESSION['game']->dealTwoCards();
@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     <?php endif ?>
 <?php endif ?>
 <?php 
+
 $_SESSION['logged_user'] = $user->fetchUser($_SESSION['logged_user']['username']); 
 if ($_SESSION['logged_user']['coins'] <= 0) {
     $user->deleteUser($_SESSION['logged_user']['user_id']);
@@ -91,7 +92,6 @@ if ($_SESSION['logged_user']['coins'] <= 0) {
 ?>
 <script>
     const choiceRange = document.querySelector('#choiceRange');
-
     choiceRange.addEventListener('change', () => {
         console.log(choiceRange.value);
         document.querySelector('#betRange').innerHTML = choiceRange.value;
