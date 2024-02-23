@@ -20,11 +20,11 @@ if (isset($_SESSION["game"])) {
   $game = $_SESSION['game'];
 }
 
-require_once './includes/header.php'
+include_once './includes/header.php';
 ?>
   <?php
   if ($_SESSION['round_num'] != 10) :
-    include './includes/game.php';
+    require_once './includes/game.php';
   ?>
   <?php else :
     header('location: index.php');

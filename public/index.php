@@ -24,7 +24,7 @@ require_once './includes/header.php'
     </form>
 <?php else : ?>
     <?php $_SESSION['round_num'] = 0; ?>
-    <form action="play.php" method="post" class="col-md-6">
+    <form action="play.php" method="get" class="col-md-6">
         <div class="card">
             <div class="card-header pb-0">
                 <h2>WELCOME TO DEAL BREAKER</h2>
