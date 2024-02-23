@@ -22,7 +22,7 @@ class User extends Database
         }
     }
     // READ
-    public function fetch_user($identifier, bool $isUsername = true): array
+    public function fetchUser($identifier, bool $isUsername = true): array
     {
         $identifier = self::sanitizeInput($identifier);
         try {
