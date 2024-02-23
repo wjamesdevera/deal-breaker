@@ -19,5 +19,5 @@ $_SESSION['logged_user'] = true;
 unset($_SESSION['logged_in']);
 unset($_SESSION['logged_user']);
 session_destroy();
-header('location: test.php');
+header('location: index.php');
 die();

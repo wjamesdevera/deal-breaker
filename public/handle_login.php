@@ -17,11 +17,14 @@ if (isset($_POST['username'])) {
     $username = sanitizeInput($_POST['username']);
     if (userExist($username)) {
         $_SESSION['logged_in'] = true;
-        $_SESSION['logged_user'] = $userObject->fetch_user($username);
+        $_SESSION['logged_user'] = $userObject->fetchUser($username);
         header('location: index.php');
         die();
     } else {
-        header('location: test.php');
+        $userObject->addNewUser($username);
+        $_SESSION['logged_in'] = true;
+        $_SESSION['logged_user'] = $userObject->fetchUser($username);
+        header('location: index.php');
         die();
     }
 }
