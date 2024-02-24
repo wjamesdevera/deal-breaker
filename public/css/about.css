@@ -14,8 +14,9 @@ nav {
 }
 
 main.container {
-  padding: 20px;
+  padding: 50px;
   margin-top: 3px;
+  max-width: 80%;
 }
 
 p {
@@ -29,6 +30,13 @@ h3{
 h4{
   font-size: 20px;
 }
+
+table{
+  width: 200px;
+  table-layout: fixed;
+
+}
+
 
 
 .navbar-title h3 {

@@ -43,7 +43,8 @@ require_once "./includes/header.php";
     <p>Players place their bets, determining the amount of chips wagered in the round.</p>
 
     <p>The payout ratios for different outcomes are as follows:</p>
-    <div class="row p-2">
+    <div class="row">
+        <div class="col-md-4">
         <table class="table table-bordered">
             <tbody>
                 <tr>
@@ -64,15 +65,16 @@ require_once "./includes/header.php";
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
 
     <h4>MAKING A CHOICE</h4>
-    <p>Players must determine if their next card will fall in between the ranks of the two face-up cards.</p>
-    <p>If the player's card falls between the two given cards, they win according to the payout ratio.</p>
-    <p>If the player's card does not fall between the two given cards, they lose their bet for that round.</p>
+    <p>Players must determine if their next card will fall in between the ranks of the two face-up cards. <br> 
+    If the player's card falls between the two given cards, they win according to the payout ratio. <br>
+    If the player's card does not fall between the two given cards, they lose their bet for that round.</p>
     <h4>SPECIAL CASES</h4>
-    <p>If the two face-up cards are of the same rank, players must predict if their next card will be higher or lower in value.</p>
-    <p>A correct prediction results in a win, while an incorrect prediction results in a loss.</p>
+    <p>If the two face-up cards are of the same rank, players must predict if their next card will be higher or lower in value. <br>
+    A correct prediction results in a win, while an incorrect prediction results in a loss.</p>
     <h4>ROUND LIMIT</h4>
     <p>Each player is given 10 rounds to play, allowing for strategic betting and gameplay.</p>
     
