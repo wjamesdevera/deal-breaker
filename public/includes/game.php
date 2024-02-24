@@ -115,14 +115,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                     </div>
                     <input class="form-range" id="choiceRange" type="range" name="bet" min="<?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>" max="<?= $_SESSION['logged_user']['coins'] ?>" value="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" step="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" data-sizing="px">
                 </div>
-                <div class="d-flex">
+                <div class="d-flex gap-3">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="pair_choice" id="high" value="high" checked />
-                        <label class="form-check-label" for="high"> High </label>
+                        <label class="form-check-label" for="high"> Higher </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="pair_choice" id="low" value="low" />
-                        <label class="form-check-label" for="low"> Low </label>
+                        <label class="form-check-label" for="low"> Lower </label>
                     </div>
                 </div>
 

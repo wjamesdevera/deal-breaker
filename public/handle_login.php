@@ -10,8 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 use DealBreaker\Model\User;
+use DealBreaker\RandomUsernameGenerator;
 
 $userObject = new User();
+$randomUsernameGenerator = new RandomUsernameGenerator();
+
 
 if (isset($_POST['username'])) {
     $username = sanitizeInput($_POST['username']);
@@ -20,10 +23,20 @@ if (isset($_POST['username'])) {
         $_SESSION['logged_user'] = $userObject->fetchUser($username);
         header('location: index.php');
         die();
-    } else {
+    } else if (!empty($username)) {
         $userObject->addNewUser($username);
         $_SESSION['logged_in'] = true;
         $_SESSION['logged_user'] = $userObject->fetchUser($username);
+        header('location: index.php');
+        die();
+    } else {
+        $randomUser = $randomUsernameGenerator->generateRandomUsername();
+        if (userExist($randomUser)) {
+            $randomUser = $randomUsernameGenerator->generateRandomUsername();
+        }
+        $userObject->addNewUser($randomUser);
+        $_SESSION['logged_in'] = true;
+        $_SESSION['logged_user'] = $userObject->fetchUser($randomUser);
         header('location: index.php');
         die();
     }
@@ -33,7 +46,7 @@ function userExist(string $username): bool
 {
     global $userObject;
     $users = $userObject->fetchUsers();
-    foreach($users as $user) {
+    foreach ($users as $user) {
         if ($user['username'] == $username) {
             return true;
         }
