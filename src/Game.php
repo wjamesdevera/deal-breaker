@@ -27,7 +27,6 @@ class Game
     private $minValue;
     private $maxValue;
     private $playerCard;
-    private $isPair;
 
     public function __construct()
     {
@@ -45,14 +44,12 @@ class Game
     private function handleReturnArrayForDealTwoCards(): array
     {
         if (self::CARD_RANKING[$this->dealtCards[0]->getRank()] == self::CARD_RANKING[$this->dealtCards[1]->getRank()]) {
-            $this->isPair = true;
             return [
                 "card_1" => $this->dealtCards[0],
                 "card_2" => $this->dealtCards[1],
                 'pair' => true
             ];
         }
-        $this->isPair = false;
         return [
             "card_1" => $this->dealtCards[0],
             "card_2" => $this->dealtCards[1],

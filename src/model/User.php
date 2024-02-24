@@ -43,7 +43,7 @@ class User extends Database
     public function fetchUsers(): array
     {
         try {
-            $sql = "SELECT user_id, username, coins FROM users ORDER BY user_id;";
+            $sql = "SELECT user_id, username, coins FROM users ORDER BY coins DESC;";
             $stmt = parent::connect()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
