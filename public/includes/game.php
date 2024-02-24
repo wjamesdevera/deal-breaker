@@ -15,20 +15,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
         $choice = sanitizeInput($_POST['pair_choice']);
     }
 ?>
-    <div class="">
+    <div class="h-100">
         <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] ?> RESULTS</h3>
-        <div class="d-flex mb-2 gap-2">
-            <div class="card border-0 rounded bg-dark" style="width: 8rem">
-                <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" class="img-fldui">
+        <div class="d-flex flex-column">
+            <div class="d-flex mb-2 gap-2 flex-fill">
+                <div class="card border-0 rounded bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" class="img-fluid">
+                </div>
+                <div class="card rounded border-0 bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid">
+                </div>
             </div>
-            <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="card rounded border-0 bg-dark flip-card-back" style="width: 8rem">
+                            <img src=<?= './img/cards/' . $game->getPlayerCard() . '.png' ?> alt="" class="img-fluid opacity-0">
+                        </div>
+                        <div class="card rounded border-0 bg-dark flip-card-front" style="width: 8rem">
+                            <img src=<?= './img/cards/' . $game->getPlayerCard() . '.png' ?> alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center mb-3">
-            <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                <img src=<?= './img/cards/' . $game->getPlayerCard() . '.png' ?> alt="" class="img-fluid">
-            </div>
+
         </div>
         <?php if (isset($_POST['pair_choice'])) : ?>
             <?php
@@ -37,14 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                 if ($result == 'win_pair' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 3)));
             ?>
-                    <div class="you-won-message fs-2 mx-auto">
+                    <div class="you-won-message fs-2 mx-auto flex-fill">
                         YOU WON!
                     </div>
                 <?php
                 } else if ($result == 'lose_match' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] - $_POST['bet']));
                 ?>
-                    <div class="you-won-message fs-2 mx-auto">
+                    <div class="you-won-message fs-2 mx-auto flex-fill">
                         YOU LOSE!
                     </div>
             <?php
@@ -57,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                 if ($result == 'win_inbetween' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 2)));
             ?>
-                    <div class="you-won-message fs-2 mx-auto">
+                    <div class="you-won-message fs-2 mx-auto flex-fill">
                         YOU WON!
                     </div>
                 <?php
@@ -81,23 +91,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     $_SESSION['round_cards'] = $_SESSION['game']->dealTwoCards();
     $deal = $_SESSION['round_cards'];
     ?>
-    <div class="">
-        <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] ?></h3>
-        <div class="d-flex mb-2 gap-2">
-            <div class="card border-0 rounded bg-dark" style="width: 8rem">
-                <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" class="img-fldui">
+    <div class="d-flex flex-column h-100">
+        <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] + 1 ?></h3>
+        <div class="flex-fill">
+            <div class="d-flex mb-2 gap-2">
+                <div class="card border-0 rounded bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" class="img-fldui">
+                </div>
+                <div class="card rounded border-0 bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid">
+                </div>
             </div>
-            <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <div class="card rounded border-0 bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid opacity-0">
+                </div>
             </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center mb-3">
-            <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid opacity-0">
-            </div>
+
         </div>
         <?php if ($deal['pair']) : ?>
-            <form action="play.php" method="post" class="form">
+            <form action="play.php" method="post" class="form flex-fill">
                 <div class="">Bet:</div>
                 <div class="d-flex gap-2">
                     <div class="form-label d-flex align-items-center fs-5 gap-2">
@@ -126,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                     </div>
                 </div>
 
-                <button name="choice" class="btn btn-primary" value="deal">Deal</button>
+                <button name="choice" class="btn btn-primary" style="background-color: #F6B17A;" value="deal">Deal</button>
                 <button name="choice" class="btn btn-primary" value="no_deal">No Deal</button>
             </form>
         <?php else : ?>
@@ -149,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                     <input class="form-range" id="choiceRange" type="range" name="bet" min="<?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>" max="<?= $_SESSION['logged_user']['coins'] ?>" value="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" step="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" data-sizing="px">
                 </div>
                 <div class="">
-                    <button name="choice" class="btn btn-primary toast-btn" value="deal">Deal</button>
+                    <button name="choice" class="btn btn-primary toast-btn" style="background-color: #F6B17A;" value="deal">Deal</button>
                     <button name="choice" class="btn btn-primary" value="no_deal">No Deal</button>
                 </div>
             </form>
@@ -167,19 +180,6 @@ if ($_SESSION['logged_user']['coins'] <= 0) {
     die();
 }
 ?>
-<div class="toast-container">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-        </div>
-    </div>
-</div>
 <script>
     const choiceRange = document.querySelector('#choiceRange');
     choiceRange.addEventListener('change', () => {
