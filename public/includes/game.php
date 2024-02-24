@@ -37,16 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                 if ($result == 'win_pair' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 3)));
             ?>
-                <div class="you-won-message">
-                    YOU WON!
-                </div>
-            <?php
+                    <div class="you-won-message fs-2 mx-auto">
+                        YOU WON!
+                    </div>
+                <?php
                 } else if ($result == 'lose_match' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] - $_POST['bet']));
-            ?>
-                <div class="you-won-message fs-2 mx-auto">
-                    YOU LOSE!
-                </div>
+                ?>
+                    <div class="you-won-message fs-2 mx-auto">
+                        YOU LOSE!
+                    </div>
             <?php
                 }
             }
@@ -57,16 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                 if ($result == 'win_inbetween' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 2)));
             ?>
-                <div class="you-won-message fs-2 mx-auto">
-                    YOU WON!
-                </div>
-            <?php
+                    <div class="you-won-message fs-2 mx-auto">
+                        YOU WON!
+                    </div>
+                <?php
                 } else if ($result == 'lose_match' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] - $_POST['bet']));
-            ?>
-                <div class="you-won-message fs-2 mx-auto">
-                    YOU LOSE!
-                </div>
+                ?>
+                    <div class="you-won-message fs-2 mx-auto">
+                        YOU LOSE!
+                    </div>
             <?php
                 }
             } else
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                             </g>
                         </svg>
                         <span id="betRange">
-                            <?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>
+                            <?= number_format(floor($_SESSION['logged_user']['coins'] * .1)) ?>
                         </span>
                     </div>
                     <input class="form-range" id="choiceRange" type="range" name="bet" min="<?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>" max="<?= $_SESSION['logged_user']['coins'] ?>" value="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" step="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" data-sizing="px">
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                             </g>
                         </svg>
                         <span id="betRange">
-                            <?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>
+                            <?= number_format(floor($_SESSION['logged_user']['coins'] * .1)) ?>
                         </span>
                     </div>
                     <input class="form-range" id="choiceRange" type="range" name="bet" min="<?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>" max="<?= $_SESSION['logged_user']['coins'] ?>" value="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" step="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" data-sizing="px">
@@ -184,6 +184,10 @@ if ($_SESSION['logged_user']['coins'] <= 0) {
     const choiceRange = document.querySelector('#choiceRange');
     choiceRange.addEventListener('change', () => {
         console.log(choiceRange.value);
-        document.querySelector('#betRange').innerHTML = choiceRange.value;
+        document.querySelector('#betRange').innerHTML = numberWithCommas(choiceRange.value);
     })
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 </script>
