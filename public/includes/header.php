@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./css/home.css">
 </head>
 
-<body class="text-light d-flex flex-column min-vh-100 bg-black">
+<body class="text-light d-flex flex-column min-vh-100" style="background-color:#424769">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <div class="navbar-title">
