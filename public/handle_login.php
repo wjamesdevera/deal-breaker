@@ -30,6 +30,9 @@ if (isset($_POST['username'])) {
         die();
     } else {
         $randomUser = $randomUsernameGenerator->generateRandomUsername();
+        if (userExist($randomUser)) {
+            $randomUser = $randomUsernameGenerator->generateRandomUsername();
+        }
         $userObject->addNewUser($randomUser);
         $_SESSION['logged_in'] = true;
         $_SESSION['logged_user'] = $userObject->fetchUser($randomUser);
