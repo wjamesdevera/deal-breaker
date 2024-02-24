@@ -75,6 +75,5 @@ require_once "./includes/header.php";
     <p>A correct prediction results in a win, while an incorrect prediction results in a loss.</p>
     <h4>ROUND LIMIT</h4>
     <p>Each player is given 10 rounds to play, allowing for strategic betting and gameplay.</p>
-    
 </main>
 <?php require_once './includes/footer.php'; ?>
