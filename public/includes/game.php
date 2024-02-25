@@ -67,14 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                 if ($result == 'win_inbetween' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 2)));
             ?>
-                    <div class="you-won-message fs-2 mx-auto flex-fill">
+                    <div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
                         YOU WON!
                     </div>
                 <?php
                 } else if ($result == 'lose_match' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] - $_POST['bet']));
                 ?>
-                    <div class="you-won-message fs-2 mx-auto">
+                    <div class="you-won-message fs-2 mx-auto puff-in-center">
                         YOU LOSE!
                     </div>
             <?php
@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
                             <?= number_format(floor($_SESSION['logged_user']['coins'] * .1)) ?>
                         </span>
                     </div>
-                    <input class="form-range" id="choiceRange" type="range" name="bet" min="<?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>" max="<?= $_SESSION['logged_user']['coins'] ?>" value="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" step="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" data-sizing="px">
+                    <input class="form-range" id="choiceRange" type="range" name="bet" min="<?= (floor($_SESSION['logged_user']['coins'] * .1)) ?>" max="<?= $_SESSION['logged_user']['coins'] ?>" value="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>" step="<?= floor(($_SESSION['logged_user']['coins'] * .1)) ?>">
                 </div>
                 <div class="">
                     <button name="choice" class="btn btn-primary toast-btn" style="background-color: #F6B17A;" value="deal">Deal</button>

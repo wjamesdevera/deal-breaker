@@ -122,7 +122,7 @@ footer {
   align-items: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  animation: FlipCardAnimation 1s ease-out .75s;
+  animation: FlipCardAnimation 1s ease-out .3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
@@ -147,4 +147,9 @@ footer {
   100% {
     transform: rotateY(180deg);
   }
+}
+
+.puff-in-center {
+	-webkit-animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
+	        animation: puff-in-center 0.7s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
 }
