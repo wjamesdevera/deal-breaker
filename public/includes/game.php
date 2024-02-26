@@ -176,7 +176,6 @@ if ($_SESSION['logged_user']['coins'] <= 0) {
     $user->deleteUser($_SESSION['logged_user']['user_id']);
     unset($_SESSION['logged_in']);
     unset($_SESSION['logged_user']);
-    header("location: index.php");
     die();
 }
 ?>
