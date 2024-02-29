@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
             if (isset($_POST['bet']) && isset($_POST['choice'])) {
                 $result = $game->determineOutcome($_POST['pair_choice']);
                 if ($result == 'win_pair' && $_POST['choice'] == 'deal') {
-                    $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 2)));
+                    $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + $_POST['bet']));
             ?>
                     <div class="you-won-message fs-2 mx-auto flex-fill">
                         YOU WON!
