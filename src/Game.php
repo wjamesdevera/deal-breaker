@@ -89,7 +89,9 @@ class Game
                 return 'lose_match';
             }
         }
-        if (($this->minValue < self::CARD_RANKING[$this->playerCard->getRank()]) && (self::CARD_RANKING[$this->playerCard->getRank()] < $this->maxValue)) {
+        if (($this->minValue == self::CARD_RANKING[$this->playerCard->getRank()]) && (self::CARD_RANKING[$this->playerCard->getRank()] == $this->maxValue)) {
+            return 'win_jackpot';
+        } else if (($this->minValue < self::CARD_RANKING[$this->playerCard->getRank()]) && (self::CARD_RANKING[$this->playerCard->getRank()] < $this->maxValue)) {
             return 'win_inbetween';
         } else {
             return 'lose_match';
