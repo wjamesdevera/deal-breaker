@@ -5,9 +5,38 @@ namespace DealBreaker\Views;
 class GameView
 {
 
-    public static function renderGameCards(int $round, array $cards)
+    public static function renderGameCardsResult(int $round, array $cards, string $playerCard)
     {
 ?>
+        <h3 class="container-fluid text-center">ROUND: <?= $round ?> RESULTS</h3>
+        <div class="d-flex flex-column">
+            <div class="d-flex mb-2 gap-2 flex-fill">
+                <div class="card border-0 rounded bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $cards[0] . '.png' ?> alt="" class="img-fluid">
+                </div>
+                <div class="card rounded border-0 bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $cards[1] . '.png' ?> alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="card rounded border-0 bg-dark flip-card-back" style="width: 8rem">
+                            <img src=<?= './img/cards/' . $playerCard . '.png' ?> alt="" class="img-fluid opacity-0">
+                        </div>
+                        <div class="card rounded border-0 bg-dark flip-card-front" style="width: 8rem">
+                            <img src=<?= './img/cards/' . $playerCard . '.png' ?> alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+
+    public static function renderGameCards(int $round, array $cards)
+    {
+    ?>
         <h3 class="container-fluid text-center">ROUND: <?= $round + 1 ?></h3>
         <div class="flex-fill">
             <div class="d-flex mb-2 gap-2">

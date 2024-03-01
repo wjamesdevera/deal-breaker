@@ -14,31 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     $_SESSION['round_num']++;
 ?>
     <div class="h-100">
-        <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] ?> RESULTS</h3>
-        <div class="d-flex flex-column">
-            <div class="d-flex mb-2 gap-2 flex-fill">
-                <div class="card border-0 rounded bg-dark" style="width: 8rem">
-                    <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" class="img-fluid">
-                </div>
-                <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                    <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid">
-                </div>
-            </div>
-            <div class="d-flex justify-content-center align-items-center mb-3">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="card rounded border-0 bg-dark flip-card-back" style="width: 8rem">
-                            <img src=<?= './img/cards/' . $game->getPlayerCard() . '.png' ?> alt="" class="img-fluid opacity-0">
-                        </div>
-                        <div class="card rounded border-0 bg-dark flip-card-front" style="width: 8rem">
-                            <img src=<?= './img/cards/' . $game->getPlayerCard() . '.png' ?> alt="" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
         <?php
+        GameView::renderGameCardsResult($_SESSION['round_num'], $game->getDealtCards(), $game->getPlayerCard());
         if (isset($_POST['pair_choice'])) {
             if (isset($_POST['bet']) && isset($_POST['choice'])) {
                 $result = $game->determineOutcome($_POST['pair_choice']);
