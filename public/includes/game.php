@@ -13,7 +13,7 @@ function sanitizeInput(string $data): string
 if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     $_SESSION['round_num']++;
 ?>
-    <div class="h-100">
+    <div class="h-100 d-flex flex-column">
         <?php
         GameView::renderGameCardsResult($_SESSION['round_num'], $game->getDealtCards(), $game->getPlayerCard());
         if (isset($_POST['pair_choice'])) {
