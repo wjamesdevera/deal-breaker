@@ -4,9 +4,31 @@ namespace DealBreaker\Views;
 
 class GameView
 {
-    public static function renderFormForNonPair(int $playerCoins)
+
+    public static function renderGameCards(int $round, array $cards)
     {
 ?>
+        <h3 class="container-fluid text-center">ROUND: <?= $round + 1 ?></h3>
+        <div class="flex-fill">
+            <div class="d-flex mb-2 gap-2">
+                <div class="card border-0 rounded bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $cards[0] . '.png' ?> alt="" class="img-fldui">
+                </div>
+                <div class="card rounded border-0 bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $cards[1] . '.png' ?> alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <div class="card rounded border-0 bg-dark" style="width: 8rem">
+                    <img src=<?= './img/cards/' . $cards[1] . '.png' ?> alt="" class="img-fluid opacity-0">
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    public static function renderFormForNonPair(int $playerCoins)
+    {
+    ?>
         <form action="play.php" method="post" class="form">
             <div class="">Bet:</div>
             <div class="d-flex gap-2">

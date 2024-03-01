@@ -73,24 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     $deal = $_SESSION['round_cards'];
     ?>
     <div class="d-flex flex-column h-100">
-        <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] + 1 ?></h3>
-        <div class="flex-fill">
-            <div class="d-flex mb-2 gap-2">
-                <div class="card border-0 rounded bg-dark" style="width: 8rem">
-                    <img src=<?= './img/cards/' . $game->getDealtCards()[0] . '.png' ?> alt="" class="img-fldui">
-                </div>
-                <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                    <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid">
-                </div>
-            </div>
-            <div class="d-flex justify-content-center align-items-center mb-3">
-                <div class="card rounded border-0 bg-dark" style="width: 8rem">
-                    <img src=<?= './img/cards/' . $game->getDealtCards()[1] . '.png' ?> alt="" class="img-fluid opacity-0">
-                </div>
-            </div>
-
-        </div>
         <?php 
+        GameView::renderGameCards($_SESSION['round_num'], $game->getDealtCards());
         if ($deal['pair']) {
             GameView::renderFormForPair($_SESSION['logged_user']['coins']); 
         } else {
