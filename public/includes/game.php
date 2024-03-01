@@ -1,6 +1,7 @@
 <?php
 
 use DealBreaker\Views\GameView;
+
 function sanitizeInput(string $data): string
 {
     $data = trim($data);
@@ -9,18 +10,8 @@ function sanitizeInput(string $data): string
     return $data;
 }
 
-if ($_SESSION['REQUEST_METHOD'] != 'POST') {
-    die();
-}
-
-$_SESSION['round_num']++;
-if (isset($_POST['choice'])) {
-    $choice = sanitizeInput($_POST['choice']);
-} 
-if (isset($_POST['pair_choice'])) {
-    $choice = sanitizeInput($_POST['pair_choice']);
-}
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+    $_SESSION['round_num']++;
 ?>
     <div class="h-100">
         <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] ?> RESULTS</h3>
@@ -47,40 +38,31 @@ if (isset($_POST['pair_choice'])) {
             </div>
 
         </div>
-        <?php if (isset($_POST['pair_choice'])) : ?>
-            <?php
+        <?php
+        if (isset($_POST['pair_choice'])) {
             if (isset($_POST['bet']) && isset($_POST['choice'])) {
                 $result = $game->determineOutcome($_POST['pair_choice']);
                 if ($result == 'win_pair' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + $_POST['bet']));
                     GameView::renderWin();
-            ?>
-                <?php
                 } else if ($result == 'lose_match' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] - $_POST['bet']));
                     GameView::renderLose();
-                ?>
-            <?php
                 }
             }
-            ?>
-            <?php else :
+        } else {
             if (isset($_POST['bet']) && isset($_POST['choice']) && !isset($_POST['pair_choice'])) {
                 $result = $game->determineOutcome();
                 if ($result == 'win_inbetween' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + $_POST['bet']));
                     GameView::renderWin();
-            ?>
-                <?php
                 } else if ($result == 'lose_match' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] - $_POST['bet']));
                     GameView::renderLose();
-                ?>
-            <?php
                 }
-            } else
-            ?>
-        <?php endif ?>
+            }
+        }
+        ?>
         <form action="play.php" method="get">
             <button type="submit" class="btn btn-primary">PLAY AGAIN</button>
         </form>
@@ -108,12 +90,16 @@ if (isset($_POST['pair_choice'])) {
             </div>
 
         </div>
-        <?php if ($deal['pair']) : GameView::renderFormForPair($_SESSION['logged_user']['coins']) ?>
-        <?php else : GameView::renderFormForNonPair($_SESSION['logged_user']['coins'])?>
-        <?php endif ?>
+        <?php 
+        if ($deal['pair']) {
+            GameView::renderFormForPair($_SESSION['logged_user']['coins']); 
+        } else {
+            GameView::renderFormForNonPair($_SESSION['logged_user']['coins']); 
+        }
+        ?>
     </div>
+<?php endif ?>
 <?php
-
 $_SESSION['logged_user'] = $user->fetchUser($_SESSION['logged_user']['username']);
 if ($_SESSION['logged_user']['coins'] <= 0) {
     $user->deleteUser($_SESSION['logged_user']['user_id']);
