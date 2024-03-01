@@ -9,13 +9,18 @@ function sanitizeInput(string $data): string
     return $data;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') :
-    $_SESSION['round_num']++;
-    if (isset($_POST['choice'])) {
-        $choice = sanitizeInput($_POST['choice']);
-    } else if (isset($_POST['pair_choice'])) {
-        $choice = sanitizeInput($_POST['pair_choice']);
-    }
+if ($_SESSION['REQUEST_METHOD'] != 'POST') {
+    die();
+}
+
+$_SESSION['round_num']++;
+if (isset($_POST['choice'])) {
+    $choice = sanitizeInput($_POST['choice']);
+} 
+if (isset($_POST['pair_choice'])) {
+    $choice = sanitizeInput($_POST['pair_choice']);
+}
+
 ?>
     <div class="h-100">
         <h3 class="container-fluid text-center">ROUND: <?= $_SESSION['round_num'] ?> RESULTS</h3>
@@ -107,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
         <?php else : GameView::renderFormForNonPair($_SESSION['logged_user']['coins'])?>
         <?php endif ?>
     </div>
-<?php endif ?>
 <?php
 
 $_SESSION['logged_user'] = $user->fetchUser($_SESSION['logged_user']['username']);

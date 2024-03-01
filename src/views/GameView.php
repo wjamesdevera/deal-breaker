@@ -74,7 +74,7 @@ class GameView
     ?>
         <div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
             YOU WON!
-        </div>;
+        </div>
     <?php
     }
 
@@ -83,7 +83,7 @@ class GameView
     ?>
         <div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
             YOU LOSE!
-        </div>;
+        </div>
 <?php
     }
 }
