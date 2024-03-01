@@ -58,7 +58,11 @@ require_once "./includes/header.php";
                             </tr>
                             <tr>
                             <td>WIN BY PAIR</td>
-                            <td>1:3</td>
+                            <td>1:2</td>
+                            </tr>
+                            <tr>
+                            <td>WIN BY THREE OF A KIND</td>
+                            <td>1:5</td>
                             </tr>
                             <tr>
                             <td>LOSE MATCH</td>
@@ -75,7 +79,8 @@ require_once "./includes/header.php";
         <h4>SPECIAL CASES</h4>
             <p>If the two face-up cards are of the same rank, players must predict if their next card will be higher or lower in value. <br>
             A correct prediction results in a win, while an incorrect prediction results in a loss.</p>
-            <h4>ROUND LIMIT</h4>
-            <p>Each player is given 10 rounds to play, allowing for strategic betting and gameplay.</p>
+            <p>In the event that the two face-up cards are of the same rank, and the next card drawn matches the rank of the face-up cards, it results in a jackpot prize.</p>
+        <h4>ROUND LIMIT</h4>
+        <p>Each player is given 10 rounds to play, allowing for strategic betting and gameplay.</p>
 </main>
 <?php require_once './includes/footer.php'; ?>
