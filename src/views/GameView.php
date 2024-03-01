@@ -5,6 +5,11 @@ namespace DealBreaker\Views;
 class GameView
 {
 
+    private static function isWin(string $gameResult): bool
+    {
+        return (strtolower($gameResult) == "win");
+    }
+
     private static function renderWin()
     {
         echo '<div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
