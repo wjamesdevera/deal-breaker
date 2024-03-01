@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
             if (isset($_POST['bet']) && isset($_POST['choice']) && !isset($_POST['pair_choice'])) {
                 $result = $game->determineOutcome();
                 if ($result == 'win_jackpot' && $_POST['choice'] == 'deal') {
-                    $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 3)));
+                    $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + ($_POST['bet'] * 5)));
                     GameView::renderWin();
                 } else if ($result == 'win_inbetween' && $_POST['choice'] == 'deal') {
                     $user->updateUser($_SESSION['logged_user']['user_id'], $_SESSION['logged_user']['username'], ($_SESSION['logged_user']['coins'] + $_POST['bet']));
