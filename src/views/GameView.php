@@ -66,17 +66,19 @@ class GameView
             <button name="choice" class="btn btn-primary" style="background-color: #F6B17A;" value="deal">Deal</button>
             <button name="choice" class="btn btn-primary" value="no_deal">No Deal</button>
         </form>
+    <?php
+    }
+
+    public static function renderWin()
+    {
+    ?>
+        <div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
+            YOU WON!
+        </div>;
 <?php
     }
 
-    private static function renderWin()
-    {
-        echo '<div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
-                YOU WON!
-                </div>';
-    }
-
-    private static function renderLose()
+    public static function renderLose()
     {
         echo '<div class="you-won-message fs-2 mx-auto flex-fill puff-in-center">
                 YOU LOSE!
